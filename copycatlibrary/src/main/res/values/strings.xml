@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Copycat Library</string>
+    <string name="menu_delete_all">Delete all</string>
 </resources>

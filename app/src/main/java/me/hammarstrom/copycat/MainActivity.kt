@@ -1,10 +1,11 @@
 package me.hammarstrom.copycat
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import me.hammarstrom.copycat.models.Envelope
+import me.hammarstrom.copycatlibrary.Copycat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             refreshRequest()
+        }
+
+        button2.setOnClickListener {
+            startActivity(
+                    Copycat.getLaunchUiIntent(this)
+            )
         }
     }
 
