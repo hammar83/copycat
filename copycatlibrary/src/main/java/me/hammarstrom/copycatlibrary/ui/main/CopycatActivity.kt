@@ -1,4 +1,4 @@
-package me.hammarstrom.copycatlibrary.ui
+package me.hammarstrom.copycatlibrary.ui.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -13,8 +13,8 @@ import me.hammarstrom.copycatlibrary.R
 import me.hammarstrom.copycatlibrary.db.CopycatDatabase
 import me.hammarstrom.copycatlibrary.db.CopycatRequestDao
 import me.hammarstrom.copycatlibrary.models.CopycatRequest
-import me.hammarstrom.copycatlibrary.ui.adapter.RequestAdapter
-import me.hammarstrom.copycatlibrary.utils.CustomViewModelFactory
+import me.hammarstrom.copycatlibrary.ui.main.adapter.RequestAdapter
+import me.hammarstrom.copycatlibrary.ui.requestdetail.RequestDetailActivity
 
 class CopycatActivity : AppCompatActivity() {
 
@@ -25,17 +25,17 @@ class CopycatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_copycat)
 
+        val adapter = RequestAdapter(getRequestClickListener())
+        val recycler = findViewById<RecyclerView>(R.id.recycler)
+
         db = CopycatDatabase.getInstance(this)
 
-        val adapter = RequestAdapter()
-
-        viewModel = ViewModelProvider(this, CustomViewModelFactory(db.copycatRequestDao())).get(CopycatViewModel::class.java)
+        viewModel = ViewModelProvider(this, CopycatViewModelFactory(db.copycatRequestDao())).get(CopycatViewModel::class.java)
 
         viewModel.requests.observe(this, Observer<List<CopycatRequest>> {
             adapter.submitList(it)
         })
 
-        val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapter
     }
@@ -58,10 +58,24 @@ class CopycatActivity : AppCompatActivity() {
         DeleteAllTask(db.copycatRequestDao()).execute()
     }
 
-    class DeleteAllTask(val requstDao: CopycatRequestDao) : AsyncTask<Void, Void, Void>() {
+    private fun getRequestClickListener(): RequestAdapter.OnRequestClickListener {
+        return object : RequestAdapter.OnRequestClickListener {
+            override fun onRequestClick(hash: String) {
+                startActivity(
+                        RequestDetailActivity.getIntent(this@CopycatActivity, hash)
+                )
+            }
+
+        }
+    }
+
+    /**
+     * AsyncTask to handle database deletion
+     */
+    class DeleteAllTask(private val requestDao: CopycatRequestDao) : AsyncTask<Void, Void, Void>() {
 
         override fun doInBackground(vararg p0: Void?): Void? {
-            requstDao.deleteAll()
+            requestDao.deleteAll()
             return null
         }
 

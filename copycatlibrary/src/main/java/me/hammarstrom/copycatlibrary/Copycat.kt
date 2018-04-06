@@ -2,7 +2,7 @@ package me.hammarstrom.copycatlibrary
 
 import android.content.Context
 import android.content.Intent
-import me.hammarstrom.copycatlibrary.ui.CopycatActivity
+import me.hammarstrom.copycatlibrary.ui.main.CopycatActivity
 
 class Copycat {
 

@@ -16,6 +16,9 @@ interface CopycatRequestDao {
     @Query("SELECT * FROM copycatrequest")
     fun getAll(): LiveData<List<CopycatRequest>>
 
+    @Query("SELECT * FROM copycatrequest WHERE hash = :hash LIMIT 1")
+    fun getRequestByHash(hash: String): LiveData<CopycatRequest>
+
     @Query("DELETE FROM copycatrequest")
     fun deleteAll()
 

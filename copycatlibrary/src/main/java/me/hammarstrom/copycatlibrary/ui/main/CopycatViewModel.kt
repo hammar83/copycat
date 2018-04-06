@@ -1,4 +1,4 @@
-package me.hammarstrom.copycatlibrary.ui
+package me.hammarstrom.copycatlibrary.ui.main
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
