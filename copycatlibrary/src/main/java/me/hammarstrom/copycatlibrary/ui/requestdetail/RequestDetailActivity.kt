@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.TextView
 import me.hammarstrom.copycatlibrary.R
 import me.hammarstrom.copycatlibrary.db.CopycatDatabase
 import me.hammarstrom.copycatlibrary.models.CopycatRequest
@@ -43,6 +44,12 @@ class RequestDetailActivity : AppCompatActivity() {
     private fun populateViewFromRequest(request: CopycatRequest?) {
         request?.let {
             supportActionBar?.title = "${it.request.method}: ${it.request.path}"
+
+            findViewById<TextView>(R.id.host).text = it.request.host
+            findViewById<TextView>(R.id.path).text = it.request.path
+            findViewById<TextView>(R.id.method).text = it.request.method
+            findViewById<TextView>(R.id.url).text = it.request.url
+            findViewById<TextView>(R.id.body).text = it.body
         }
     }
 

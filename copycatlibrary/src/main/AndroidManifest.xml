@@ -1,12 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.hammarstrom.copycatlibrary">
 
-    <application android:theme="@style/AppTheme">
+    <application>
         <activity
             android:name=".ui.main.CopycatActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.requestdetail.RequestDetailActivity" />
+        <activity
+            android:name=".ui.requestdetail.RequestDetailActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

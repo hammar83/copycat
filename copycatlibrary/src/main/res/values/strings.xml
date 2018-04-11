@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Copycat Library</string>
     <string name="menu_delete_all">Delete all</string>
+    <string name="request_title">Request</string>
+    <string name="host">Host</string>
+    <string name="path">Path</string>
+    <string name="method">Method</string>
+    <string name="url">URL</string>
+    <string name="body_title">Body</string>
+    <string name="toolbar_title">Copycat UI</string>
 </resources>

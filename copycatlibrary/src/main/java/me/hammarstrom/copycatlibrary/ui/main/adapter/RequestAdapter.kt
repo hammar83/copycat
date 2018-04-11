@@ -34,8 +34,16 @@ class RequestAdapter(
     ) : RecyclerView.ViewHolder(v) {
 
         fun bindTo(request: CopycatRequest) {
-            itemView.findViewById<TextView>(R.id.hash).text = request.hash
-            itemView.findViewById<TextView>(R.id.method).text = request.request.method
+            val method = request.request.method
+
+            when (method) {
+                "GET" -> itemView.setBackgroundResource(R.color.colorGreen)
+                "PUT" -> itemView.setBackgroundResource(R.color.colorOrange)
+                "POST" -> itemView.setBackgroundResource(R.color.colorBlue)
+                "DELETE" -> itemView.setBackgroundResource(R.color.colorRed)
+            }
+
+            itemView.findViewById<TextView>(R.id.method).text = method
             itemView.findViewById<TextView>(R.id.path).text = request.request.path
 
             itemView.setOnClickListener {
