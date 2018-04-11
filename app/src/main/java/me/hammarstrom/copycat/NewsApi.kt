@@ -24,7 +24,7 @@ class NewsApi(context: Context) {
                 }
     }
 
-    private lateinit var service: NewsService
+    private var service: NewsService
 
     init {
         val retrofit = Retrofit.Builder()
